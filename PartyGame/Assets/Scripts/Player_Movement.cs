@@ -2,22 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Movement : MonoBehaviour {
+public class Player_Movement : MonoBehaviour
+{
 
     private float movementSpeed = 1.0f;
-    private bool canJump = false;
-    private Rigidbody rigidbody;
 
-	// Use this for initialization
-	void Start () {
-        rigidbody = GetComponent<Rigidbody>();
-	}
+    private float jumpForce = 3.0f;
+
+    public AudioClip jump;
+
+    public bool isGrounded;
+    Rigidbody rb;
+    AudioSource audioSource;
+
+    // Use this for initialization
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyUp(KeyCode.Space))
+    void Update()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            canJump = true;
+            isGrounded = false;
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            audioSource.PlayOneShot(jump);
         }
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
@@ -31,13 +43,10 @@ public class Player_Movement : MonoBehaviour {
         }
     }
 
-    void FixedUpdate()
+
+    void OnCollisionStay()
     {
-        if (canJump)
-        {
-            canJump = false;
-            rigidbody.AddForce(0, 50, 0, ForceMode.Impulse);
-        }
+        isGrounded = true;
     }
 
 }

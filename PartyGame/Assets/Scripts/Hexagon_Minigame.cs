@@ -6,9 +6,12 @@ public class Hexagon_Minigame : MonoBehaviour
 {
 
     public GameObject middleOctogon;
+    public GameObject flag;
+
 
     private GameObject[] hexagon;
     private GameObject selectedHexagon;
+
     private float countdown = 3.0f;
     private int direction = 1;
 
@@ -93,6 +96,30 @@ public class Hexagon_Minigame : MonoBehaviour
     private void SelectHexagon()
     {
         int randomIndex = (int)Random.Range(0.0f, hexagon.Length-1);
+        switch (randomIndex)
+        {
+            case 0:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
+                break;
+            case 1:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                break;
+            case 2:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                break;
+            case 3:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                break;
+            case 4:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+                break;
+            case 5:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+                break;
+            case 6:
+                flag.GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+                break;
+        }
         selectedHexagon = hexagon[randomIndex];
     }
 
