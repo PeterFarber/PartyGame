@@ -52,16 +52,23 @@ public class PlayerThwomper : MonoBehaviour {
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(Input.GetAxis(h_input), 0, 0);
+            Vector3 look = new Vector3(moveDirection.x, moveDirection.y, moveDirection.z);
+            if (look != Vector3.zero)
+            {
+                transform.GetChild(0).rotation = Quaternion.LookRotation(look);
+            }
+
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
             if (Input.GetButton(jump_input)) {
                 audioSource.PlayOneShot(jump);
                 moveDirection.y = jumpSpeed;
             }
-
         }
+
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+
         //float moveHorizontal = Input.GetAxisRaw(h_input);
         //float moveVertical = Input.GetAxisRaw(v_input);
 
@@ -80,28 +87,42 @@ public class PlayerThwomper : MonoBehaviour {
         isGrounded = true;
     }
 
-    void OnCollisionEnter(Collision c)
+    //void OnCollisionEnter(Collision c)
+    //{
+    //    // force is how forcefully we will push the player away from the enemy.
+    //    float force = 100;
+
+    //    // If the object we hit is the enemy
+    //    if (c.gameObject.tag == "Player")
+    //    {
+    //        audioSource.PlayOneShot(bounce);
+
+    //        // Calculate Angle Between the collision point and the player
+    //        Vector3 dir = c.gameObject.transform.position - transform.position;
+    //        // We then get the opposite (-Vector3) and normalize it
+    //        dir = -dir.normalized;
+    //        // And finally we add force in the direction of dir and multiply it by force. 
+    //        // This will push back the player
+    //        GetComponent<Rigidbody>().AddForce(dir * force);
+    //    }
+    //    else if (c.gameObject.tag == "Lava")
+    //    {
+    //        this.gameObject.SetActive(false);
+    //    }
+    //}
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // force is how forcefully we will push the player away from the enemy.
-        float force = 100;
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic)
+            return;
 
-        // If the object we hit is the enemy
-        if (c.gameObject.tag == "Player")
-        {
-            audioSource.PlayOneShot(bounce);
+        if (hit.moveDirection.y < -0.3F)
+            return;
 
-            // Calculate Angle Between the collision point and the player
-            Vector3 dir = c.gameObject.transform.position - transform.position;
-            // We then get the opposite (-Vector3) and normalize it
-            dir = -dir.normalized;
-            // And finally we add force in the direction of dir and multiply it by force. 
-            // This will push back the player
-            GetComponent<Rigidbody>().AddForce(dir * force);
-        }
-        else if (c.gameObject.tag == "Lava")
-        {
-            this.gameObject.SetActive(false);
-        }
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.velocity = pushDir * 10;
+        print(pushDir);
     }
 
 }

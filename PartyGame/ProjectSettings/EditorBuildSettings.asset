@@ -4,4 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ThwomperRoom.unity
+    guid: 8609b5a86ed8a2d4cbb8c708988fab8e
+  - enabled: 1
+    path: Assets/Scenes/HexagonHeat.unity
+    guid: f046e1783ff043546a5d0b318cb42dd7
+  m_configObjects: {}
