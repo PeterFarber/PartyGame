@@ -32,6 +32,11 @@ public class TestMovement : MonoBehaviour
     private int _joystick;
 
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
 
     void Start()
     {
