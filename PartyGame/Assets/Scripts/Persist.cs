@@ -3,93 +3,114 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Persist : MonoBehaviour {
-    private int[] _scores;
 
-    Vector2[] points;
+    public int[] _playersJoystick;
 
-    float a, b, c;
-    float l;
+    private string _startButton;
 
-
-    float x, y;
-
-    // Use this for initialization
     void Start()
     {
-        points = new Vector2[3];
-        points[0] = new Vector2(0, 0);
-        points[1] = new Vector2(1, -1);
-        points[2] = new Vector2(2, 0);
-        CalcABC();
-        l = CalcLength();
-        x = CalcX(0.25f);
-        y = CalcY(x);
-        print(l);
-        print(x);
-        print(y);
+        _startButton = "";
+
+        //Initlialize all of the _playerJoysticks to -1!
+        _playersJoystick = new int[4];
+        for (int i = 0; i < _playersJoystick.Length; i++)
+        {
+            _playersJoystick[i] = -1;
+        }
     }
 
     void Awake()
     {
-
         DontDestroyOnLoad(this.gameObject);
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-
-
-
+        JoystickCheck();
     }
 
-    float CalcX(float r)
+    bool CheckFirstPlayer()
     {
-        return Mathf.Sqrt(((r*l) + Mathf.Pow(Mathf.Sqrt(1 + Mathf.Pow((2*a*points[0].x) + b, 2)),2) - b)/(2*a));
+        return (_playersJoystick[0] == -1) ? true : false;
     }
 
-    float CalcY(float x)
+    void JoystickCheck()
     {
-        return (a * Mathf.Pow(x, 2)) + (b * x) + c;
+        for (int i = 0; i < 16; i++)
+        {
+            bool con = false;
+            for (int c = 0; c < 4; c++)
+            {
+                if (_playersJoystick[c] == i + 1)
+                {
+                    con = true;
+                }
+            }
+            if (con)
+            {
+                continue;
+            }
+            if (Input.GetKeyDown("joystick " + (i + 1) + " button 1"))
+            {
+                print(i + 1);
+                for (int p = 0; p < 4; p++)
+                {
+                    if (_playersJoystick[p] == -1)
+                    {
+                        _playersJoystick[p] = i + 1;
+                        if (CheckFirstPlayer() == true)
+                        {
+                            _startButton = "joystick " + _playersJoystick[p] + " button 9";
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
 
-    void CalcABC()
+    public bool CheckPlayer(int p)
     {
-        float A1 = -Mathf.Pow(points[0].x, 2) + Mathf.Pow(points[1].x, 2);
-        //print(A1);
-        float B1 = -points[0].x + points[1].x;
-        //print(B1);
-        float D1 = -points[0].y + points[1].y;
-        //print(D1);
-        float A2 = -Mathf.Pow(points[1].x, 2) + Mathf.Pow(points[2].x, 2);
-        //print(A2);
-        float B2 = -points[1].x + points[2].x;
-        //print(B2);
-        float D2 = -points[1].y + points[2].y;
-        //print(D2);
-        float BM = -(B2 / B1);
-        //print(BM);
-        float A3 = BM * A1 + A2;//Maybe Perenth
-        //print(A3);
-        float D3 = BM * D1 + D2;
-        //print(D3);
-
-        a = D3 / A3;
-        b = (D1 - A1 * a) / B1;
-        c = points[0].y + (a * Mathf.Pow(points[0].x, 2)) - (b * Mathf.Pow(points[0].x, 2));
-
+        if (_playersJoystick[p] == -1)
+        {
+            return false;
+        }
+        return true;
     }
 
-    float CalcLength()
+    public int PlayerCount()
     {
-        return ( Mathf.Sqrt(Mathf.Pow(2 * a* points[2].x+b,2)+1) * (2 * a * points[2].x + b) + invSinH(2 * a * points[2].x + b) ) / (4 * a) -
-            (Mathf.Sqrt(Mathf.Pow(2 * a * points[0].x + b, 2) + 1) * (2 * a * points[0].x + b) + invSinH(2 * a * points[0].x + b)) / (4 * a);
+        int sum = 0;
+        for(int i = 0; i < _playersJoystick.Length; i++)
+        {
+            if (_playersJoystick[i] != -1)
+            {
+                sum++;
+            }
+        }
+        return sum;
     }
 
-    float invSinH(float x)
+    public int PlayerJoystick(int p)
     {
-        return Mathf.Log(x + Mathf.Sqrt(1 + Mathf.Pow(x, 2)));
+        return _playersJoystick[p];
     }
+    //IEnumerator EndGameCheck()
+    //{
+    //    if (_running)
+    //    {
+    //        _playerCount = PlayerCount();
+    //        if (_playerCount == 1)
+    //        {
+    //            _audioSource.clip = WinningClip;
+    //            _audioSource.Play();
+    //            _running = false;
+    //            yield return new WaitForSeconds(_audioSource.clip.length);
+    //            Application.LoadLevel(1);
+    //        }
+    //    }
+    //}
+
+
 }

@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.91764706, g: 0.85490197, b: 0.36862746, a: 1}
+  color: {r: 0.39716092, g: 0.48426837, b: 0.7075472, a: 1}
 --- !u!65 &694491983
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2452,7 +2452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.91764706, g: 0.85490197, b: 0.36862746, a: 1}
+  color: {r: 0.39716092, g: 0.48426837, b: 0.7075472, a: 1}
 --- !u!65 &885018595
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2635,7 +2635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.5372549, g: 0.654902, b: 0.39215687, a: 1}
+  color: {r: 0.654902, g: 0.39612296, b: 0.39215687, a: 1}
 --- !u!65 &1027624270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3695,7 +3695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.91764706, g: 0.85490197, b: 0.36862746, a: 1}
+  color: {r: 0.39716092, g: 0.48426837, b: 0.7075472, a: 1}
 --- !u!65 &1328233717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4558,7 +4558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.5372549, g: 0.654902, b: 0.39215687, a: 1}
+  color: {r: 0.654902, g: 0.39612296, b: 0.39215687, a: 1}
 --- !u!65 &1883120248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4741,7 +4741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.91764706, g: 0.85490197, b: 0.36862746, a: 1}
+  color: {r: 0.39716092, g: 0.48426837, b: 0.7075472, a: 1}
 --- !u!65 &1904275537
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5276,7 +5276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13ac131aab6f046975fa966725bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.5372549, g: 0.654902, b: 0.39215687, a: 1}
+  color: {r: 0.654902, g: 0.39612296, b: 0.39215687, a: 1}
 --- !u!65 &2032323442
 BoxCollider:
   m_ObjectHideFlags: 0
