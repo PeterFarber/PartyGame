@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestMovement : MonoBehaviour
+public class Player_Controller : MonoBehaviour
 {
 
     public GameObject particle;
@@ -34,7 +34,7 @@ public class TestMovement : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+
     }
 
 
@@ -66,6 +66,9 @@ public class TestMovement : MonoBehaviour
         {
             _audioSource.PlayOneShot(JumpClip);
             _isGrounded = false;
+            //float cY = rb.velocity.y;
+            //float nY = Mathf.Abs(cY - jumpForce);
+            //rb.AddForce(Vector3.up * nY, ForceMode.Impulse);
             _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
         }
         if (Input.GetKeyDown("joystick " + _joystick + " button 2") && _isGrounded)

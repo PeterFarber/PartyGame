@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Thwomper_Minigame : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class Thwomper_Minigame : MonoBehaviour
     public AudioClip RumblingClip;
     public AudioClip DropClip;
 
-    private int[] _playersJoystick;
 
     private GameObject[] _thwompers;
     private Vector3 _thwomperOffset;
@@ -32,44 +32,60 @@ public class Thwomper_Minigame : MonoBehaviour
 
     private int[] _thwompersSelected;
     private bool _running;
-    private string _startButton;
     private int _playerCount;
 
     private int _thwomperDirection;
     private float _thwomperAngle;
 
+    private Joystick_Controller _joystickController;
+
+    private Score_Controller _scoreController;
 
     void Start()
     {
+
+        _joystickController = GameObject.Find("Global_Controller").GetComponent<Joystick_Controller>();
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (_joystickController.CheckPlayer(i))
+            {
+                Players[i].GetComponent<Player_Controller>().setJoystick(_joystickController.PlayerJoystick(i));
+                Players[i].SetActive(true);
+            }
+        }
+
+        _scoreController = GameObject.Find("Global_Controller").GetComponent<Score_Controller>();
 
         //Initialize Varaibles!
         _thwompers = new GameObject[7];
         _thwomperOffset = new Vector3(-3, 4, 0);
         _thwompersSelected = null;
+        _thwomperDirection = -1;
+        _thwomperAngle = 0;
+
         _waveTimer = 2f;
         _nextWave = false;
         _shakeTimer = 2f;
         _shaking = false;
         _dropping = false;
         _dropTimer = 1.0f;
+
         _running = false;
-        _startButton = "";
         _playerCount = 0;
         _atStart = true;
-        _thwomperDirection = -1;
-        _thwomperAngle = 0;
 
         _audioSource = GetComponent<AudioSource>();
 
-        //Initlialize all of the _playerJoysticks to -1!
-        _playersJoystick = new int[4];
-        for(int i = 0; i < _playersJoystick.Length; i++)
-        {
-            _playersJoystick[i] = -1;
-        }
-
         //Create Thwompers
         CreateThwompers();
+
+        //Set game is running equal to true!
+        _running = true;
+        _nextWave = true;
+
+        //Get Player Count.
+        _playerCount = PlayerCount();
 
     }
 
@@ -80,11 +96,18 @@ public class Thwomper_Minigame : MonoBehaviour
             _playerCount = PlayerCount();
             if (_playerCount == 1)
             {
+                for (int i = 0; i < Players.Length; i++)
+                {
+                    if (Players[i].activeInHierarchy)
+                    {
+                        _scoreController.IncrementScore(i);
+                    }
+                }
                 _audioSource.clip = WinningClip;
                 _audioSource.Play();
                 _running = false;
                 yield return new WaitForSeconds(_audioSource.clip.length);
-                Application.LoadLevel(1);
+                SceneManager.LoadScene(1);
             }
         }
     }
@@ -93,8 +116,6 @@ public class Thwomper_Minigame : MonoBehaviour
     {
 
         StartCoroutine(EndGameCheck());
-
-        StartCheck();
 
         if (_running)
         {
@@ -262,75 +283,6 @@ public class Thwomper_Minigame : MonoBehaviour
         return sum;
     }
 
-    bool CheckFirstPlayer()
-    {
-        for (int i = 0; i < Players.Length; i++)
-        {
-            if (Players[i].activeSelf == true)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    void JoystickCheck()
-    {
-        if(_playerCount < 4) {
-            for(int i = 0; i < 16; i++)
-            {
-                bool con = false;
-                for(int c = 0; c < 4; c++)
-                {
-                    if (_playersJoystick[c] == i+1)
-                    {
-                        con = true;
-                    }
-                }
-                if (con)
-                {
-                    continue;
-                }
-                if (Input.GetKeyDown("joystick " + (i+1) + " button 1"))
-                {
-                    print(i + 1);
-                    for (int p = 0; p < 4; p++)
-                    {
-                        if(_playersJoystick[p] == -1)
-                        {
-                            _playersJoystick[p] = i+1;
-                            if (CheckFirstPlayer() == true)
-                            {
-                                _startButton = "joystick " + _playersJoystick[p] + " button 9";
-                            }
-                            Players[p].SetActive(true);
-                            Players[p].GetComponent<TestMovement>().setJoystick(_playersJoystick[p]);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    void StartCheck()
-    {
-        if (_startButton != "" && Input.GetKeyDown(_startButton) && _running == false)
-        {
-            //Set game is running equal to true!
-            _running = true;
-            _nextWave = true;
-
-            //Get Player Count.
-            _playerCount = PlayerCount();
-
-        }
-
-        JoystickCheck();
-
-
-    }
     void SelectThwompers()
     {
         _thwompersSelected = null;
@@ -360,7 +312,6 @@ public class Thwomper_Minigame : MonoBehaviour
         }
 
     }
-
 
     void CreateThwompers()
     {

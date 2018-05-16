@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hexagon_Minigame : MonoBehaviour
 {
@@ -30,12 +31,31 @@ public class Hexagon_Minigame : MonoBehaviour
     private bool moving = false;
     private bool running = false;
 
-    private string startButton = "";
+    private Joystick_Controller _joystickController;
 
+    private Score_Controller _scoreController;
 
     // Use this for initialization
     void Start()
     {
+
+        _joystickController = GameObject.Find("Global_Controller").GetComponent<Joystick_Controller>();
+
+        for(int i = 0; i < 4; i++)
+        {
+            if (_joystickController.CheckPlayer(i))
+            {
+                players[i].GetComponent<Player_Controller>().setJoystick(_joystickController.PlayerJoystick(i));
+                players[i].SetActive(true);
+            }
+        }
+
+        _scoreController = GameObject.Find("Global_Controller").GetComponent<Score_Controller>();
+       
+
+
+        //Get Player Count.
+        playerCount = PlayerCount();
 
         audioSource = this.GetComponent<AudioSource>();
 
@@ -45,16 +65,14 @@ public class Hexagon_Minigame : MonoBehaviour
         //Set the starting position of to the current y position.
         startPos = yPos = middleOctogon.transform.position.y;
 
-        //Initlialize all of the _playerJoysticks to -1!
-        _playersJoystick = new int[4];
-        for (int i = 0; i < _playersJoystick.Length; i++)
-        {
-            _playersJoystick[i] = -1;
-        }
-
         //Set the reset timer to the countDown time.
         resetTime = countdown;
 
+        //Set game is running equal to true!
+        running = true;
+
+        //Select new tile.
+        SelectHexagon();
     }
 
     //Create Field
@@ -95,14 +113,20 @@ public class Hexagon_Minigame : MonoBehaviour
         if (running)
         {
             playerCount = PlayerCount();
-            print(playerCount);
             if (playerCount == 1)
             {
+                for(int i = 0; i < players.Length; i++)
+                {
+                    if (players[i].activeInHierarchy)
+                    {
+                        _scoreController.IncrementScore(i);
+                    }
+                }
                 audioSource.clip = win;
                 audioSource.Play();
                 running = false;
                 yield return new WaitForSeconds(audioSource.clip.length);
-                Application.LoadLevel(0);
+                SceneManager.LoadScene(0);
             }
         }
     }
@@ -112,7 +136,7 @@ public class Hexagon_Minigame : MonoBehaviour
     {
         StartCoroutine(playEngineSound());
 
-        StartCheck();
+        //StartCheck();
 
         if (!moving && running)
         {
@@ -137,77 +161,6 @@ public class Hexagon_Minigame : MonoBehaviour
 
     }
 
-    void JoystickCheck()
-    {
-        if (playerCount < 4)
-        {
-            for (int i = 0; i < 16; i++)
-            {
-                bool con = false;
-                for (int c = 0; c < 4; c++)
-                {
-                    if (_playersJoystick[c] == i + 1)
-                    {
-                        con = true;
-                    }
-                }
-                if (con)
-                {
-                    continue;
-                }
-                if (Input.GetKeyDown("joystick " + (i + 1) + " button 1"))
-                {
-                    print(i + 1);
-                    for (int p = 0; p < 4; p++)
-                    {
-                        if (_playersJoystick[p] == -1)
-                        {
-                            _playersJoystick[p] = i + 1;
-                            if (CheckFirstPlayer() == true)
-                            {
-                                startButton = "joystick " + _playersJoystick[p] + " button 9";
-                            }
-                            players[p].SetActive(true);
-                            players[p].GetComponent<TestMovement>().setJoystick(_playersJoystick[p]);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    void StartCheck()
-    {
-        if (startButton != "" && Input.GetKeyDown(startButton) && running == false)
-        {
-            //Set game is running equal to true!
-            running = true;
-
-            //Select new tile.
-            SelectHexagon();
-
-            //Get Player Count.
-            playerCount = PlayerCount();
-
-        }
-
-        JoystickCheck();
-
-
-    }
-
-    bool CheckFirstPlayer()
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i].activeSelf == true)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 
     void FixedUpdate()
     {

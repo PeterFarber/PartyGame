@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 82962972606648156}
   - component: {fileID: 54945758575848966}
   - component: {fileID: 135040189218852420}
-  - component: {fileID: 114196416273634186}
+  - component: {fileID: 114884085481528968}
   m_Layer: 0
   m_Name: Player 3
   m_TagString: Player
@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264057574659730}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0.34, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4494673265104142}
@@ -416,7 +416,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114196416273634186
+--- !u!114 &114884085481528968
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1264057574659730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a20c5d5b56c493b4cb3b39ba12b69ad2, type: 3}
+  m_Script: {fileID: 11500000, guid: 913dae9fc6052c745a09b69153612c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1262824532835228, guid: c37024c8833690b4d9a838a8326027de, type: 2}
@@ -433,7 +433,7 @@ MonoBehaviour:
   Speed: 1
   JumpHeight: 1
   DashDistance: 5
-  Color: {r: 0.0063681602, g: 0, b: 1, a: 0}
+  Color: {r: 0, g: 0.0034923553, b: 1, a: 0}
   MovementX: 0
   MovementZ: 0
   JumpClip: {fileID: 8300000, guid: 84b629f92d5dbbb488ad5ce115fdc998, type: 3}

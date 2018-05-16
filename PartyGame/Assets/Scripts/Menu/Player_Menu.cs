@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMenu : MonoBehaviour {
+public class Player_Menu : MonoBehaviour {
 
 
     public GameObject StartText;
-    private GameObject _persitedController;
+    private Joystick_Controller _joystickController;
 
     // Use this for initialization
     void Awake()
     {
-        _persitedController = GameObject.Find("Persited_Controller");
+        _joystickController = GameObject.Find("Global_Controller").GetComponent<Joystick_Controller>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int players = _persitedController.GetComponent<Persist>().PlayerCount();
-        int playerOne = _persitedController.GetComponent<Persist>().PlayerJoystick(0);
+        int players = _joystickController.PlayerCount();
+        int playerOne = _joystickController.PlayerJoystick(0);
 
         if (players >= 2){
             StartText.GetComponent<UnityEngine.UI.Text>().color = Color.white;
