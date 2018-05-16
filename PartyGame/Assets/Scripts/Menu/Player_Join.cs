@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJoin : MonoBehaviour {
+public class Player_Join : MonoBehaviour {
 
     public int _player = -1;
 
-    private GameObject _persitedController;
+    private Joystick_Controller _joystickController;
 
 	// Use this for initialization
 	void Awake () {
-        _persitedController = GameObject.Find("Persited_Controller");
+        _joystickController = GameObject.Find("Global_Controller").GetComponent<Joystick_Controller>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        bool joined = _persitedController.GetComponent<Persist>().CheckPlayer(_player-1);
+        bool joined = _joystickController.CheckPlayer(_player-1);
         
         if (joined)
         {
