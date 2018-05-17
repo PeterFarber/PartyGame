@@ -95,10 +95,6 @@ public class jumpMotion : MonoBehaviour
 
     void Update()
     {
-        //for (int i = 0; i < _playerCount; i++)
-        //{
-        //    _platforms[i].SetActive(true);
-        //}
         if (_speedingUp == true)
         {
             _rotateSpeed += 0.01f;
