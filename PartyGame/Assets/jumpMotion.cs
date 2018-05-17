@@ -103,7 +103,7 @@ public class jumpMotion : MonoBehaviour
         {
             _rotateSpeed -= 0.01f;
         }
-        if(_rotateSpeed > 5)
+        if(_rotateSpeed > 10)
         {
 
             _speedingUp = false;
@@ -111,7 +111,7 @@ public class jumpMotion : MonoBehaviour
         if(_rotateSpeed < 2){
             _speedingUp = true;
         }
-        if (_startTimer > 50)
+        if (_startTimer > 10)
         {
             _jumpRope.transform.Rotate(_rotateSpeed, 0, 0);
         }
@@ -120,7 +120,7 @@ public class jumpMotion : MonoBehaviour
             _startTimer += 0.1f;
         }
         StartCoroutine(EndGameCheck());
-
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time*5);
 
     }
 

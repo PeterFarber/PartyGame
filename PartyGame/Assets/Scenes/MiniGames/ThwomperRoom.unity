@@ -1668,6 +1668,26 @@ Prefab:
       propertyPath: m_Constraints
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 114365587460706268, guid: 956ff000bd9076a4ebb9ba6011bce0d1,
+        type: 2}
+      propertyPath: JumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114365587460706268, guid: 956ff000bd9076a4ebb9ba6011bce0d1,
+        type: 2}
+      propertyPath: DashTimer
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114365587460706268, guid: 956ff000bd9076a4ebb9ba6011bce0d1,
+        type: 2}
+      propertyPath: DashCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114365587460706268, guid: 956ff000bd9076a4ebb9ba6011bce0d1,
+        type: 2}
+      propertyPath: JumpCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 956ff000bd9076a4ebb9ba6011bce0d1, type: 2}
   m_IsPrefabParent: 0
@@ -3488,6 +3508,26 @@ Prefab:
       propertyPath: MovementZ
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114884085481528968, guid: e7a5f07ce443267448a4dd750d96557a,
+        type: 2}
+      propertyPath: JumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884085481528968, guid: e7a5f07ce443267448a4dd750d96557a,
+        type: 2}
+      propertyPath: DashTimer
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884085481528968, guid: e7a5f07ce443267448a4dd750d96557a,
+        type: 2}
+      propertyPath: DashCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114884085481528968, guid: e7a5f07ce443267448a4dd750d96557a,
+        type: 2}
+      propertyPath: JumpCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7a5f07ce443267448a4dd750d96557a, type: 2}
   m_IsPrefabParent: 0
@@ -3941,6 +3981,26 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 114567953852852742, guid: c8f7eaf13185f394a8684d93c8f75cce,
+        type: 2}
+      propertyPath: JumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114567953852852742, guid: c8f7eaf13185f394a8684d93c8f75cce,
+        type: 2}
+      propertyPath: DashTimer
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114567953852852742, guid: c8f7eaf13185f394a8684d93c8f75cce,
+        type: 2}
+      propertyPath: DashCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114567953852852742, guid: c8f7eaf13185f394a8684d93c8f75cce,
+        type: 2}
+      propertyPath: JumpCount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8f7eaf13185f394a8684d93c8f75cce, type: 2}
@@ -5357,6 +5417,26 @@ Prefab:
         type: 2}
       propertyPath: MovementX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114343120398213330, guid: 333b3ac0c7c02f04cb5f7a8555dbb3ad,
+        type: 2}
+      propertyPath: JumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114343120398213330, guid: 333b3ac0c7c02f04cb5f7a8555dbb3ad,
+        type: 2}
+      propertyPath: DashTimer
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114343120398213330, guid: 333b3ac0c7c02f04cb5f7a8555dbb3ad,
+        type: 2}
+      propertyPath: DashCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114343120398213330, guid: 333b3ac0c7c02f04cb5f7a8555dbb3ad,
+        type: 2}
+      propertyPath: JumpCount
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 333b3ac0c7c02f04cb5f7a8555dbb3ad, type: 2}

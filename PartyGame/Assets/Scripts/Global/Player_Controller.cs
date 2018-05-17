@@ -11,6 +11,14 @@ public class Player_Controller : MonoBehaviour
     public float Speed = 1f;
     public float JumpHeight = 1f;
     public float DashDistance = 5f;
+    public int JumpCount = 1;
+    public int DashCount = 1;
+    public float DashTimer;
+
+
+    private int _jumpCount;
+    private int _dashCount;
+    private float _dashTimerReset;
 
     public Color Color;
 
@@ -28,7 +36,6 @@ public class Player_Controller : MonoBehaviour
     private Vector3 _inputs = Vector3.zero;
     private bool _isGrounded = true;
 
-
     private int _joystick;
 
 
@@ -40,6 +47,9 @@ public class Player_Controller : MonoBehaviour
 
     void Start()
     {
+        _dashTimerReset = DashTimer = 1.5f;
+        _jumpCount = JumpCount;
+        _dashCount = DashCount;
         _body = GetComponent<Rigidbody>();
         _audioSource = GetComponent<AudioSource>();
 
@@ -49,6 +59,16 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
+
+        if(DashCount < _dashCount)
+        {
+            DashTimer -= Time.deltaTime;
+            if(DashTimer <= 0)
+            {
+                DashCount++;
+                DashTimer = _dashTimerReset;
+            }
+        }
 
         _inputs = Vector3.zero;
         if (!MovementX)
@@ -62,18 +82,20 @@ public class Player_Controller : MonoBehaviour
         if (_inputs != Vector3.zero)
             transform.forward = _inputs;
 
-        if (Input.GetKeyDown("joystick " + _joystick + " button 1") && _isGrounded)
+        if (Input.GetKeyDown("joystick " + _joystick + " button 1") && JumpCount > 0)
         {
+            if (!_isGrounded)
+            {
+                JumpCount--;
+            }
             _audioSource.PlayOneShot(JumpClip);
-            _isGrounded = false;
-            //float cY = rb.velocity.y;
-            //float nY = Mathf.Abs(cY - jumpForce);
-            //rb.AddForce(Vector3.up * nY, ForceMode.Impulse);
-            _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            float cY = _body.velocity.y;
+            float nY = Mathf.Abs(cY - JumpHeight);
+            _body.AddForce(Vector3.up *  nY, ForceMode.Impulse);
         }
-        if (Input.GetKeyDown("joystick " + _joystick + " button 2") && _isGrounded)
+        if (Input.GetKeyDown("joystick " + _joystick + " button 2") && DashCount >= 1)
         {
-            _isGrounded = false;
+            DashCount--;
             Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
             _body.AddForce(dashVelocity, ForceMode.VelocityChange);
         }
@@ -95,6 +117,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (c.gameObject.CompareTag("Ground"))
         {
+            JumpCount = _jumpCount;
             _isGrounded = true;
         }
        
@@ -134,6 +157,10 @@ public class Player_Controller : MonoBehaviour
         if (c.gameObject.CompareTag("Ground"))
         {
             _isGrounded = false;
+            JumpCount--;
+            if(DashCount > 1) {
+                DashCount = 1;
+            }
         }
 
     }
