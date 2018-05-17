@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4540012677585364}
   - component: {fileID: 82770658599664388}
   - component: {fileID: 114200150702259976}
+
   m_Layer: 0
   m_Name: Sound_Player
   m_TagString: Untagged
@@ -50,7 +51,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f6a835ff866bb7745b1b24dd3cfad065, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

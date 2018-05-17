@@ -25,7 +25,7 @@ public class Player_Menu : MonoBehaviour {
             StartText.GetComponent<UnityEngine.UI.Text>().color = Color.white;
             if(Input.GetKeyDown("joystick " + playerOne + " button 9"))
             {
-                SceneManager.LoadScene("HexagonHeat");
+                SceneManager.LoadScene("JumpRoper");
             }
         }
         else

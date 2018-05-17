@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HexagonHeat.unity
     guid: f046e1783ff043546a5d0b318cb42dd7
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 0b07f678993cac44995f4a01e6ab5c0d
+  - enabled: 1
+    path: Assets/Scenes/JumpRoper.unity
+    guid: 3242c159cf922c74085b21f4ee79c56a
   m_configObjects: {}
