@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeleteSelf : MonoBehaviour {
+public class Delete_Self : MonoBehaviour {
 
     public float Seconds = 1.5f;
 

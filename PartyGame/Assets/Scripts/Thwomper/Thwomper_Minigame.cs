@@ -107,14 +107,14 @@ public class Thwomper_Minigame : MonoBehaviour
                 _audioSource.Play();
                 _running = false;
                 yield return new WaitForSeconds(_audioSource.clip.length);
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene("JumpRoper");
             }
         }
     }
 
     void Update()
     {
-
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time * 5);
         StartCoroutine(EndGameCheck());
 
         if (_running)
@@ -141,7 +141,7 @@ public class Thwomper_Minigame : MonoBehaviour
                     _shaking = true;
 
                     GameObject soundPlayer = Instantiate(SoundPlayer, transform.position, Random.rotation);
-                    soundPlayer.GetComponent<SoundPlayer>().Play(RumblingClip);
+                    soundPlayer.GetComponent<Sound_Player>().Play(RumblingClip);
 
                 }
             }
@@ -158,7 +158,6 @@ public class Thwomper_Minigame : MonoBehaviour
                     Rigidbody thwomper = _thwompers[_thwompersSelected[i]].GetComponent<Rigidbody>();
                     _thwomperAngle += Time.deltaTime * _thwomperDirection * 20;
                     thwomper.transform.eulerAngles = new Vector3(0.0f, 0.0f, _thwomperAngle);
-                    print(_thwomperAngle);
                     if((_thwomperAngle <= -10 && _thwomperDirection == -1) || (_thwomperAngle >= 10 && _thwomperDirection == 1))
                     {
                         dir = true;
@@ -187,7 +186,7 @@ public class Thwomper_Minigame : MonoBehaviour
                     _dropping = true;
 
                     GameObject soundPlayer = Instantiate(SoundPlayer, transform.position, Random.rotation);
-                    soundPlayer.GetComponent<SoundPlayer>().Play(DropClip);
+                    soundPlayer.GetComponent<Sound_Player>().Play(DropClip);
 
                     for (int i = 0; i < _thwompersSelected.Length; i++)
                     {
@@ -241,7 +240,6 @@ public class Thwomper_Minigame : MonoBehaviour
                         if (thwomper.position.y >= _thwomperOffset.y)
                         {
                             _thwompers[_thwompersSelected[i]].gameObject.transform.position = new Vector3(thwomper.position.x, _thwomperOffset.y, thwomper.position.z);
-                            print(thwomper.position);
                             thwomper.isKinematic = true;
                         }
                     }

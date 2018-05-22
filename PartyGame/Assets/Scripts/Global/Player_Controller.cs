@@ -140,7 +140,7 @@ public class Player_Controller : MonoBehaviour
         else if (c.gameObject.tag == "Lava" || c.gameObject.tag == "Enemy")
         {
             GameObject soundPlayer = Instantiate(SoundPlayer, transform.position, Random.rotation);
-            soundPlayer.GetComponent<SoundPlayer>().Play(BounceClip);
+            soundPlayer.GetComponent<Sound_Player>().Play(BounceClip);
 
             this.gameObject.SetActive(false);
             for (int h = 0; h < 18; h++)

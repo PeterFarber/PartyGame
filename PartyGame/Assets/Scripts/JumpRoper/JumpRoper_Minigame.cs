@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class jumpMotion : MonoBehaviour
+public class JumpRoper_Minigame : MonoBehaviour
 {
 
     public GameObject[] Players;
@@ -27,11 +27,9 @@ public class jumpMotion : MonoBehaviour
     public bool _atStart;
 
     private bool _running;
-    private string _startButton;
     private int _playerCount;
 
     private float _rotateSpeed;
-    private float _count;
     private bool _speedingUp;
     private bool _transition;
 
@@ -60,12 +58,10 @@ public class jumpMotion : MonoBehaviour
         _startTimer = 0f;
         _waveTimer = 2f;
         _running = false;
-        _startButton = "";
         _playerCount = 0;
         _atStart = true;
         _speedingUp = true;
         _shakeTimer = Random.Range(1.0f, 100.0f);
-        _count = 0;
         _audioSource = GetComponent<AudioSource>();
 
         _running = true;
@@ -84,21 +80,24 @@ public class jumpMotion : MonoBehaviour
             _playerCount = PlayerCount();
             if (_playerCount == 1)
             {
+                for (int i = 0; i < Players.Length; i++)
+                {
+                    if (Players[i].activeInHierarchy)
+                    {
+                        _scoreController.IncrementScore(i);
+                    }
+                }
                 _audioSource.clip = WinningClip;
                 _audioSource.Play();
                 _running = false;
                 yield return new WaitForSeconds(_audioSource.clip.length);
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("HexagonHeat");
             }
         }
     }
 
     void Update()
     {
-        //for (int i = 0; i < _playerCount; i++)
-        //{
-        //    _platforms[i].SetActive(true);
-        //}
         if (_speedingUp == true)
         {
             _rotateSpeed += 0.01f;
@@ -107,7 +106,7 @@ public class jumpMotion : MonoBehaviour
         {
             _rotateSpeed -= 0.01f;
         }
-        if(_rotateSpeed > 5)
+        if(_rotateSpeed > 8)
         {
 
             _speedingUp = false;
@@ -115,7 +114,7 @@ public class jumpMotion : MonoBehaviour
         if(_rotateSpeed < 2){
             _speedingUp = true;
         }
-        if (_startTimer > 50)
+        if (_startTimer > 10)
         {
             _jumpRope.transform.Rotate(_rotateSpeed, 0, 0);
         }
@@ -124,7 +123,7 @@ public class jumpMotion : MonoBehaviour
             _startTimer += 0.1f;
         }
         StartCoroutine(EndGameCheck());
-
+        RenderSettings.skybox.SetFloat("_Rotation", Time.time*5);
 
     }
 

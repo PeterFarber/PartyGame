@@ -9,48 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1550316219434780}
+  m_RootGameObject: {fileID: 1474483185614690}
   m_IsPrefabParent: 1
---- !u!1 &1550316219434780
+--- !u!1 &1474483185614690
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4540012677585364}
-  - component: {fileID: 82770658599664388}
-  - component: {fileID: 114934645257725540}
+  - component: {fileID: 4640382972068706}
+  - component: {fileID: 114248628449949598}
+  - component: {fileID: 82003878715967450}
   m_Layer: 0
-  m_Name: Sound_Player
+  m_Name: JumpRoper_Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4540012677585364
+--- !u!4 &4640382972068706
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1550316219434780}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -2, y: 0.7, z: 0}
+  m_GameObject: {fileID: 1474483185614690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.790889, y: 1.0136597, z: -1.9590242}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82770658599664388
+--- !u!82 &82003878715967450
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1550316219434780}
+  m_GameObject: {fileID: 1474483185614690}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f6a835ff866bb7745b1b24dd3cfad065, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -136,14 +136,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114934645257725540
+--- !u!114 &114248628449949598
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1550316219434780}
+  m_GameObject: {fileID: 1474483185614690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8537664353c6b4ab63a81560d69f65, type: 3}
+  m_Script: {fileID: 11500000, guid: 45b652bc46d7458478d3ad059997deca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  SoundPlayer: {fileID: 1550316219434780, guid: 5cd3b85f4c3261243b3181caf927d3b0,
+    type: 2}
+  WinningClip: {fileID: 8300000, guid: d7ecb4275870be94f81b234ff9d4f5b6, type: 3}
+  _jumpRope: {fileID: 0}
+  _platforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _waveTimer: 0
+  _nextWave: 0
+  _shakeTimer: 0
+  _shaking: 0
+  _atStart: 0

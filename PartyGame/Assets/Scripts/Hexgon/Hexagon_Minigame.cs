@@ -126,7 +126,7 @@ public class Hexagon_Minigame : MonoBehaviour
                 audioSource.Play();
                 running = false;
                 yield return new WaitForSeconds(audioSource.clip.length);
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("ThwomperRoom");
             }
         }
     }
